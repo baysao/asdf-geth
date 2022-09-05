@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+_install() {
+	local github_name="ethereum/go-ethereum"
+	local install_type=$1
+	local version=$2
+
+	local install_path=$3
+	tmpd=$(mktemp -d)
+	cd $tmpd
+	source_path="https://github.com/${github_name}/archive/refs/tags/v${version}.tar.gz"
+
+	curl -L $source_path -o ${version}.tar.gz
+	tar -xzf ${version}.tar.gz
+	rm ${version}.tar.gz
+	# version1=$(echo $version | sed 's/^v//')
+	cd ./go-ethereum-${version}
+	make all
+	mkdir -p $install_path/bin
+	mv ./build/bin/* $install_path/bin/
+
+	rm -rf $tmpd
+}
+
+_install $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
