@@ -5,7 +5,7 @@
 ## Install
 
 ```
-asdf plugin-add Geth https://github.com/baysao/asdf-geth.git
+asdf plugin-add geth https://github.com/baysao/asdf-geth.git
 ```
 
 ## Use
